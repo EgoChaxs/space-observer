@@ -2,9 +2,9 @@
 
 ## Overview
 
-Room Observer is designed as an artificial observation system that continuously perceives and maintains an understanding of a physical environment.
+Space Observer is designed as an artificial observation system that continuously perceives and maintains an understanding of a physical environment.
 
-The system is built around the idea that intelligent observation requires more than detecting objects in individual frames. Similar to how humans observe the world, Room Observer must combine sensory input, persistent understanding, memory, and reasoning in order to interpret changes and answer questions about the environment.
+The system is built around the idea that intelligent observation requires more than detecting objects in individual frames. Similar to how humans observe the world, Space Observer must combine sensory input, persistent understanding, memory, and reasoning in order to interpret changes and answer questions about the environment.
 
 To achieve this, the system is divided into four major subsystems: Perception, World Model, Memory, and Reasoning. Perception transforms raw sensory information into meaningful detections. The World Model maintains the system's current understanding of the environment. Memory preserves historical information and past events. Reasoning uses both current and historical knowledge to answer questions and derive conclusions.
 
@@ -12,7 +12,7 @@ This separation allows the system to evolve its perception methods, understandin
 
 ## Architectural Principles
 
-### `Separation of Responsibilities`
+### **Separation of Responsibilities**
 
 Each subsystem has a clearly defined responsibility and should avoid taking ownership of concerns that belong to other parts of the system.
 
@@ -23,7 +23,7 @@ Reasoning is responsible for using available knowledge to answer questions and d
 
 This separation prevents individual components from becoming overly complex and allows the system to evolve more easily.
 
-### `Modularity and Replaceability`
+### **Modularity and Replaceability**
 
 Subsystems should communicate through well-defined interfaces rather than relying on specific implementations.
 
@@ -31,24 +31,24 @@ For example, the World Model should not depend on how detections are produced. W
 
 This allows individual components to be improved or replaced without requiring changes throughout the entire system.
 
-### `Persistent Understanding Over Individual Observations`
+### **Persistent Understanding Over Individual Observations**
 
-Room Observer is not designed as a collection of independent image analyses. The system should maintain a continuous understanding of an environment over time.
+Space Observer is not designed as a collection of independent image analyses. The system should maintain a continuous understanding of an environment over time.
 
 Individual observations provide new information, but the World Model is responsible for combining this information into a persistent representation of the observed world.
 
-### `Independent Testability`
+### **Independent Testability**
 
 Each subsystem should be testable independently whenever possible.
 
-Perception should be testable by providing images and evaluating produced detections.  
-The World Model should be testable using simulated detections.  
-Memory should be testable using generated events and historical data.  
-Reasoning should be testable using predefined world states and memories.
+Perception by providing images and evaluating produced detections.  
+The World Model by using simulated detections.  
+Memory by using generated events and historical data.  
+Reasoning by using predefined world states and memories.
 
 This allows development to progress incrementally without requiring the entire system to be operational.
 
-### `Scalability of Environments`
+### **Scalability of Environments**
 
 The architecture should not be tied to a specific room or physical space.
 
@@ -58,11 +58,11 @@ The system represents environments through generic concepts such as Spaces, Obje
 
 ## High-Level Architecture
 
-Room Observer is organized into four major subsystems: Perception, World Model, Memory, and Reasoning.
+Space Observer is organized into four major subsystems: Perception, World Model, Memory, and Reasoning.
 
 Each subsystem represents a different capability required for artificial observation. The subsystems communicate through defined boundaries, allowing each component to evolve independently while contributing to the overall understanding of the observed environment.
 
-                 Room Observer
+                 Space Observer
 
 
         ┌──────────────────────────────┐
@@ -107,11 +107,11 @@ Each subsystem represents a different capability required for artificial observa
              │                   │
         World Model            Memory
 
-### `Perception Subsystem`
+### **Perception Subsystem**
 
 The Perception Subsystem is responsible for converting raw sensory information into meaningful detections.
 
-It represents the sensory capabilities of Room Observer. This subsystem receives information from sensors such as cameras and processes this information through an observation and detection pipeline.
+It represents the sensory capabilities of Space Observer. This subsystem receives information from sensors such as cameras and processes this information through an observation and detection pipeline.
 
 Its responsibility ends once standardized detections are produced.
 
@@ -126,7 +126,7 @@ Output:
 - Laptop detected at position X
 - Mug detected at position Y
 
-### `World Model Subsystem`
+### **World Model Subsystem**
 
 The World Model Subsystem represents the current understanding of the observed environment.
 
@@ -148,7 +148,7 @@ Result:
 - Update current state
 - Generate "Laptop moved" event
 
-### `Memory Subsystem`
+### **Memory Subsystem**
 
 The Memory Subsystem preserves information about the past.
 
@@ -167,9 +167,9 @@ The World Model provides:
 Memory provides:
 - Previous laptop locations and movements
 
-### `Reasoning Subsystem`
+### **Reasoning Subsystem**
 
-The Reasoning Subsystem allows Room Observer to answer questions and derive conclusions using available knowledge.
+The Reasoning Subsystem allows Space Observer to answer questions and derive conclusions using available knowledge.
 
 It does not directly observe the environment. Instead, it relies on the World Model for current information and Memory for historical context.
 
@@ -189,7 +189,7 @@ Output:
 
 ## Data Flow
 
-Room Observer operates as a continuously running system where different subsystems perform their responsibilities independently while sharing information through defined boundaries.
+Space Observer operates as a continuously running system where different subsystems perform their responsibilities independently while sharing information through defined boundaries.
 
 The primary information flow begins with the Perception Subsystem, which receives sensory input and transforms it into standardized detections. These detections are then provided to the World Model Subsystem, which integrates new information with its current understanding of the environment.
 
@@ -198,7 +198,7 @@ When changes between previous and updated states are identified, meaningful tran
 The Reasoning Subsystem does not depend on new observations to operate. Instead, it uses the current state provided by the World Model and historical information provided by Memory to answer questions and derive conclusions.
 
 The general flow is:
-```txt
+```
 Sensor Input
 ↓
 Observation

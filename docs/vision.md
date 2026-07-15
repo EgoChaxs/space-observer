@@ -1,10 +1,10 @@
-# Room Observer
+# Space Observer
 
 ## Project Overview
 
-Room Observer is an AI system designed to observe physical environments, build an internal understanding of the world around it, and reason about changes over time.
+Space Observer is an AI system designed to observe physical environments, build an internal understanding of the world around it, and reason about changes over time.
 
-Inspired by human perception, the project aims to automate the process of observing, understanding, and interpreting physical spaces. Rather than simply detecting objects in images, Room Observer focuses on creating a persistent representation of an environment that can be updated through new observations and used to assist users or support autonomous systems.
+Inspired by human perception, the project aims to automate the process of observing, understanding, and interpreting physical spaces. Rather than simply detecting objects in images, Space Observer focuses on creating a persistent representation of an environment that can be updated through new observations and used to assist users or support autonomous systems.
 
 The long-term goal is to develop a general perception system capable of allowing AI agents to understand and interact with the physical world.
 
@@ -16,13 +16,13 @@ Humans interact with the physical world by continuously observing their surround
 
 Many existing computer vision systems are designed to solve specific perception tasks, such as object detection, tracking, or image classification. While these systems are highly capable, they often focus on individual tasks rather than maintaining a persistent understanding of the environment they observe.
 
-The long-term motivation behind Room Observer is to explore the foundations of artificial perception: enabling AI agents and robots to understand and interact with the physical world through continuous observation, memory, and reasoning.
+The long-term motivation behind Space Observer is to explore the foundations of artificial perception: enabling AI agents and robots to understand and interact with the physical world through continuous observation, memory, and reasoning.
 
 ## Core Principles
 
 ### Perception Beyond Detection
 
-Room Observer should go beyond identifying objects in individual images. The goal is to transform visual information into a persistent understanding of the environment and the entities within it.
+Space Observer should go beyond identifying objects in individual images. The goal is to transform visual information into a persistent understanding of the environment and the entities within it.
 
 ### Persistent World Model
 
@@ -38,21 +38,11 @@ Although initial development will focus on rooms and personal spaces, the archit
 
 ### Observation for Reasoning and Assistance
 
-The purpose of observation is not merely to collect information. Room Observer should use its understanding of the world to assist users and support intelligent autonomous systems.
-
-## Long-Term Vision
-
-The long-term vision of Room Observer is to develop a general-purpose artificial perception system capable of allowing AI agents to understand and interact with physical environments.
-
-Just as humans continuously observe their surroundings, build memories, and reason about changes in the world, Room Observer aims to provide AI systems with the ability to maintain an evolving understanding of their environment.
-
-Beyond identifying objects in individual images, the system should be capable of understanding relationships between entities, remembering previous observations, detecting meaningful events, and using this knowledge to support intelligent decision-making.
-
-The ultimate goal is not simply to create a vision system, but to explore the foundations required for AI agents and robots to perceive, understand, and operate within the physical world.
+The purpose of observation is not merely to collect information. Space Observer should use its understanding of the world to assist users and support intelligent autonomous systems.
 
 ## Non-Goals
 
-Room Observer is not intended to become:
+Space Observer is not intended to become:
 
 ### A traditional surveillance system
 
@@ -64,7 +54,7 @@ Object detection is only one component of the system. The main goal is to build 
 
 ### A fully autonomous robot platform
 
-Although Room Observer is inspired by robotic perception systems, the initial focus is developing the perception and reasoning capabilities required by intelligent agents rather than building a complete robot.
+Although Space Observer is inspired by robotic perception systems, the initial focus is developing the perception and reasoning capabilities required by intelligent agents rather than building a complete robot.
 
 ### A replacement for human judgment
 

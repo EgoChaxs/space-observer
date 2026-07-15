@@ -1,11 +1,11 @@
 # Core Concepts
 
-This document defines the fundamental concepts used throughout the Room Observer project. These definitions provide a shared vocabulary for the architecture, implementation, and documentation.
+This document defines the fundamental concepts used throughout the Space Observer project. These definitions provide a shared vocabulary for the architecture, implementation, and documentation.
 
 The concepts are presented in the order they appear throughout the observation pipeline, from the physical environment to the reasoning layer.
 > Concepts describe the responsibilities and meaning of entities within the system rather than their current implementation. Definitions should remain valid as the project evolves and new technologies are introduced.
 
-## `Space`
+## **Space**
 
 ### Definition
 
@@ -22,7 +22,7 @@ Spaces provide a logical boundary for organizing observations and maintaining in
 - Has one World Model
 - Generates Events
 
-## `Sensor`
+## **Sensor**
 
 ### Definition
 
@@ -37,7 +37,7 @@ Sensors act as the interface between the physical world and the perception syste
 - Observes a Space
 - Produces data used to create an Observation
 
-## `Observation`
+## **Observation**
 
 ### Definition
 
@@ -55,7 +55,7 @@ Observations serve as the evidence used to update the system's understanding of 
 - Is used to update the World Model
 - May generate Events
 
-## `Detection`
+## **Detection**
 
 ### Definition
 
@@ -71,7 +71,7 @@ Detections provide evidence about the entities that may exist within a Space. Th
 - May correspond to an Observed Object
 - Is used to update the World Model
 
-## `Observed Object`
+## **Observed Object**
 
 ### Definition
 
@@ -88,7 +88,7 @@ Observed Objects allow the system to recognize entities across multiple observat
 - Exists within the World Model
 - May be involved in Events
 
-## `World Model`
+## **World Model**
 
 ### Definition
 
@@ -106,7 +106,7 @@ The World Model represents the system's current belief about the environment. Ra
 - Generates Events
 - Is queried during Reasoning
 
-## `Event`
+## **Event**
 
 ### Definition
 
@@ -123,7 +123,7 @@ Events summarize significant changes in an environment, allowing the system to r
 - May involve one or more Observed Objects
 - Is stored in Memory
 
-## `Memory`
+## **Memory**
 
 ### Definition
 
@@ -140,7 +140,7 @@ Memory enables the system to retain historical observations, events, and object 
 - Stores Events
 - Supports Reasoning
 
-## `Reasoning`
+## **Reasoning**
 
 ### Definition
 
