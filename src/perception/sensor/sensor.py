@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from src.models.observation import Observation
 
 class Sensor(ABC):
