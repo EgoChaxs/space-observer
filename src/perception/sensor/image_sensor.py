@@ -5,8 +5,8 @@ from PIL import Image
 import numpy as np
 
 from src.models.observation import Observation
-from src.perception.sensor import Sensor
-from src.perception.image_config import ImageSensorConfig, ImageSourceType
+from src.perception.sensor.sensor import Sensor
+from src.perception.sensor.image_config import ImageSensorConfig, ImageSourceType
 
 class ImageSensor(Sensor):
     def __init__(self, config: ImageSensorConfig):
