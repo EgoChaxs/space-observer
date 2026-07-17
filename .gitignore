@@ -6,3 +6,8 @@ __pycache__/
 .vscode/
 .idea/
 .env
+
+# Model weights
+assets/models/*.pt
+assets/models/*.pth
+assets/models/*.onnx
