@@ -1,4 +1,4 @@
-from src.perception.sensor.image_sensor import ImageSensor
+from src.perception.sensors.image_sensor import ImageSensor
 from configs.perception.image_sensor_config import ImageSensorConfig, ImageSourceType
 
 

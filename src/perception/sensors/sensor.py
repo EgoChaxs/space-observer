@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from perception.models.observation import Observation
+from src.perception.models.observation import Observation
 
 class Sensor(ABC):
 

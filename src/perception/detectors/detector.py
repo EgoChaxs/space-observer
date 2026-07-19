@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from perception.models.observation import Observation
-from perception.models.detection import Detection
+from src.perception.models.observation import Observation
+from src.perception.models.detection import Detection
 
 
 class Detector(ABC):

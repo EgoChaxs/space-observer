@@ -2,9 +2,9 @@ from ultralytics import YOLO
 from uuid import uuid4
 import numpy as np
 
-from perception.detectors.detector import Detector
-from perception.models.observation import Observation
-from perception.models.detection import Detection, BoundingBox
+from src.perception.detectors.detector import Detector
+from src.perception.models.observation import Observation
+from src.perception.models.detection import Detection, BoundingBox
 from configs.perception.yolo_detector_config import YOLODetectorConfig
 
 

@@ -1,7 +1,7 @@
 from configs.perception.yolo_detector_config import YOLODetectorConfig
-from src.perception.detection.detectors.yolo_detector import YOLODetector
-from src.perception.sensor.image_sensor import ImageSensor
-from src.perception.detection.detection_engine import DetectionEngine
+from src.perception.detectors.yolo_detector import YOLODetector
+from src.perception.sensors.image_sensor import ImageSensor
+from src.perception.engines.detection_engine import DetectionEngine
 from configs.perception.image_sensor_config import ImageSensorConfig, ImageSourceType
 
 

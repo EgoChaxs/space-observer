@@ -1,6 +1,6 @@
-from perception.models.observation import Observation
-from perception.models.detection import Detection
-from perception.detectors.detector import Detector
+from src.perception.models.observation import Observation
+from src.perception.models.detection import Detection
+from src.perception.detectors.detector import Detector
 
 
 class DetectionEngine:
