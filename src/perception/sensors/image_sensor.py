@@ -4,8 +4,8 @@ from pathlib import Path
 from PIL import Image
 import numpy as np
 
-from src.models.observation import Observation
-from src.perception.sensor.sensor import Sensor
+from perception.models.observation import Observation
+from src.perception.sensors.sensor import Sensor
 from configs.perception.image_sensor_config import ImageSensorConfig, ImageSourceType
 
 class ImageSensor(Sensor):
