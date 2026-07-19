@@ -9,7 +9,7 @@ class ImageSourceType(Enum):
     FOLDER = "folder"
 
 
-@dataclass
+@dataclass(slots=True)
 class ImageSensorConfig:
     """Configuration required to initialize an image sensor.
 

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 import numpy as np
 
-@dataclass
+@dataclass(slots=True)
 class Observation:
     """
     Represents a single capture produced by a sensor.

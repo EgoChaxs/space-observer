@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(slots=True)
 class YOLODetectorConfig:
     """Configuration required to initialize a YOLO detector.
 

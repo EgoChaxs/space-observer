@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(slots=True)
 class BoundingBox:
     """Coordinates defining an object's location in an image."""
 
