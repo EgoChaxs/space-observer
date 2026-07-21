@@ -11,7 +11,7 @@ class AppearanceEmbedding:
     object's appearance and can be used for similarity comparison.
 
     Attributes:
-        vector: Feature vector describing the object's appearance.
+        embedding: Feature vector describing the object's appearance.
     """
 
-    vector: np.ndarray
+    embedding: np.ndarray
