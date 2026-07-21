@@ -40,7 +40,7 @@ class AppearanceExtractor:
             AppearanceEmbedding containing the object's visual feature vector.
         """
 
-        crop = self._crop(observation.payload, detection.bbox)
+        crop = self._crop(observation.payload, detection.bounding_box)
 
         embedding = self._encode(crop)
 
@@ -59,7 +59,10 @@ class AppearanceExtractor:
         Returns:
             Cropped image containing only the detected object region.
         """
-        return payload[bbox.y1:bbox.y2, bbox.x1:bbox.x2]
+        return payload[
+            int(bbox.y1):int(bbox.y2), 
+            int(bbox.x1):int(bbox.x2)
+        ]
 
     def _encode(self, cropped_image: np.ndarray) -> np.ndarray:
         """
