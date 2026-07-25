@@ -5,13 +5,13 @@ from configs.perception.image_sensor_config import ImageSensorConfig, ImageSourc
 config = ImageSensorConfig(
     sensor_id="test_dataset",
     source_type=ImageSourceType.FOLDER,
-    path="assets/test_images/cat.jpg"
+    path="assets/test_images/"
 )
 
 sensor = ImageSensor(config)
 
 
-for _ in range(10):
+for _ in range(3):
     observation = sensor.capture()
 
     print(observation.id)
