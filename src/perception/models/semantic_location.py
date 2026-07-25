@@ -12,4 +12,4 @@ class SemanticLocation:
         location_id: Identifier of the object or environment location.
     """
 
-    location_id: str
+    location_detection_id: str
