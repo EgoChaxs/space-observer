@@ -20,6 +20,7 @@ class Evidence:
         appearance_embedding: Visual representation of the object's appearance.
         semantic_location: Semantic location of the object.
         relationships: Semantic relationships with other detected objects.
+            Currently empty; reserved for a future perception enhancement.
     """
 
     detection: Detection
