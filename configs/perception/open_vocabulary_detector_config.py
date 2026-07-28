@@ -13,4 +13,4 @@ class OpenVocabularyDetectorConfig:
 
     model_path: str
     prompts: list[str]
-    confidence_threshold: float
+    confidence_threshold: float = 0.3
