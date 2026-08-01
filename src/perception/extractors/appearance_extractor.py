@@ -87,4 +87,13 @@ class AppearanceExtractor:
 
         embedding = outputs.last_hidden_state[:, 0]
 
-        return embedding.squeeze(0).cpu().numpy()
+        embedding = embedding.squeeze(0).cpu().numpy()
+
+        norm = np.linalg.norm(embedding)
+
+        if norm == 0:
+            raise ValueError("DINO produced a zero embedding")
+        
+        embedding = embedding / norm
+
+        return embedding
