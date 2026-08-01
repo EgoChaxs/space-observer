@@ -1,3 +1,5 @@
+import numpy as np
+
 from configs.perception.yolo_detector_config import YOLODetectorConfig
 from src.perception.detectors.yolo_detector import YOLODetector
 from src.perception.sensors.image_sensor import ImageSensor
@@ -32,8 +34,11 @@ def main():
 
     appearance = appearance_extractor.extract(observation, detections[0])
 
+    norm = np.linalg.norm(appearance.embedding)
+
     print(detections)
     print(appearance.embedding.shape)
+    print(norm)
 
 
 if __name__ == "__main__":
