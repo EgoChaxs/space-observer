@@ -34,7 +34,7 @@ class WorldObject:
     id: UUID
     label: str
     appearance_embedding: np.ndarray
-    semantic_location: str
+    semantic_location: UUID | None
     first_seen: datetime
     last_seen: datetime
     confidence: float
