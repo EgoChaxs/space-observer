@@ -87,9 +87,10 @@ class WorldModel:
             old_location = world_object.semantic_location
 
             # Resolve new location
-            location_world_object = detection_to_world_object.get(
-                evidence.semantic_location.location_detection_id
-            )
+            if evidence.semantic_location is not None:
+                location_world_object = detection_to_world_object.get(
+                    evidence.semantic_location.location_detection_id
+                )
 
             new_location = None
 
@@ -209,7 +210,7 @@ class WorldModel:
         """
         return np.dot(
             world_object.appearance_embedding, 
-            evidence.appearance_embedding
+            evidence.appearance_embedding.embedding
         )
 
     @property
