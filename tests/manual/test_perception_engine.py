@@ -1,7 +1,5 @@
-from configs.perception.yolo_detector_config import YOLODetectorConfig
 from configs.perception.open_vocabulary_detector_config import OpenVocabularyDetectorConfig
 from configs.perception.image_sensor_config import ImageSensorConfig, ImageSourceType
-from src.perception.detectors.yolo_detector import YOLODetector
 from src.perception.detectors.open_vocabulary_detector import OpenVocabularyDetector
 from src.perception.sensors.image_sensor import ImageSensor
 from src.perception.extractors.appearance_extractor import AppearanceExtractor
