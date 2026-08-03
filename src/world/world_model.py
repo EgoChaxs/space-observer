@@ -8,7 +8,7 @@ from src.world.models.world_object import WorldObject
 from src.world.events.event import Event
 from src.world.generators.event_generator import EventGenerator
 
-MATCH_THRESHOLD = 0.75
+MATCH_THRESHOLD = 0.60
 
 class WorldModel:
     """
@@ -86,6 +86,8 @@ class WorldModel:
             was_visible = world_object.is_visible
             old_location = world_object.semantic_location
 
+            location_world_object = None
+
             # Resolve new location
             if evidence.semantic_location is not None:
                 location_world_object = detection_to_world_object.get(
@@ -136,7 +138,8 @@ class WorldModel:
             world_object.confidence = evidence.detection.confidence
             world_object.last_seen = perception_result.observation.timestamp
             world_object.is_visible = True
-            world_object.semantic_location = new_location
+            if new_location is not None:
+                world_object.semantic_location = new_location
 
         # Mark unseen objects as invisible
         unupdated_object_ids = self._objects.keys() - updated_objects
