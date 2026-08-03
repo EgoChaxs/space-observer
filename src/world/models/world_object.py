@@ -1,6 +1,6 @@
 import numpy as np
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from uuid import UUID
 
@@ -33,7 +33,7 @@ class WorldObject:
 
     id: UUID
     label: str
-    appearance_embedding: np.ndarray
+    appearance_embedding: np.ndarray = field(repr=False)
     semantic_location: UUID | None
     first_seen: datetime
     last_seen: datetime
