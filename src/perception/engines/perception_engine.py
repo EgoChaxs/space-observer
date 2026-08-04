@@ -3,31 +3,30 @@ from src.perception.models.observation import Observation
 from src.perception.models.detection import Detection
 
 from src.perception.sensors.sensor import Sensor
-from src.perception.detectors.detector import Detector
 from src.perception.engines.detection_engine import DetectionEngine
 from src.perception.builders.evidence_builder import EvidenceBuilder
+
 
 class PerceptionEngine:
     """
     Coordinates the complete perception pipeline.
 
-    The PerceptionEngine acts as the entry point of the perception
-    subsystem. It coordinates sensor input, object detection, and
-    evidence construction to transform raw observations into structured
-    perceptual information.
+    The PerceptionEngine acts as the entry point of the perception subsystem.
+    It coordinates sensor input, object detection, and evidence construction
+    to transform raw observations into structured perceptual information.
 
-    The engine does not implement perception algorithms itself. Instead,
-    it delegates responsibilities to specialized components:
+    The engine does not implement perception algorithms itself. Instead, it
+    delegates responsibilities to specialized components:
 
     - Sensor:
-        Captures observations from an environment.
+        Captures observations from the environment.
 
-    - Detector:
-        Identifies objects present in an observation.
+    - DetectionEngine:
+        Executes object detection and applies detection post-processing.
 
     - EvidenceBuilder:
-        Enriches detections with additional perceptual information and
-        creates Evidence representations.
+        Enriches detections with additional perceptual information and creates
+        Evidence representations.
 
     Pipeline:
 
@@ -37,7 +36,7 @@ class PerceptionEngine:
         Observation
           |
           v
-        Detector
+        DetectionEngine
           |
           v
         Detection[]
@@ -53,34 +52,35 @@ class PerceptionEngine:
 
     Attributes:
         sensor:
-            Source of observations for the environment.
+            Source of observations from the environment.
+
+        detection_engine:
+            Executes object detection and returns processed detections.
 
         evidence_builder:
             Builds enriched Evidence objects from detections.
-
-        detection_engine:
-            Executes object detection using the provided detector.
     """
+
     def __init__(
-            self, 
-            sensor: Sensor,
-            detector: Detector,
-            evidence_builder: EvidenceBuilder
+        self,
+        sensor: Sensor,
+        detection_engine: DetectionEngine,
+        evidence_builder: EvidenceBuilder
     ):
         """
         Initialize the perception engine.
 
-        Dependencies are injected to keep the engine independent from
-        specific implementations. Different sensors, detectors, or evidence
+        Dependencies are injected to keep the engine independent from specific
+        implementations. Different sensors, detection engines, or evidence
         builders can be provided without modifying the pipeline logic.
 
         Args:
             sensor:
                 Sensor implementation responsible for capturing observations.
 
-            detector:
-                Detector implementation responsible for identifying objects
-                within observations.
+            detection_engine:
+                Engine responsible for running object detection and applying
+                optional detection post-processing.
 
             evidence_builder:
                 Builder responsible for enriching detections and producing
@@ -88,7 +88,7 @@ class PerceptionEngine:
         """
         self._sensor = sensor
         self._evidence_builder = evidence_builder
-        self._detection_engine = DetectionEngine(detector)
+        self._detection_engine = detection_engine
 
     def process(self) -> PerceptionResult:
         """
@@ -99,8 +99,8 @@ class PerceptionEngine:
         perception result.
 
         Returns:
-            PerceptionResult containing the observation and the generated
-            evidence for detected objects.
+            PerceptionResult containing the observation and generated evidence
+            for detected objects.
         """
         observation = self._observe()
         detections = self._detect(observation)
