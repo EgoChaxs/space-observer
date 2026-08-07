@@ -8,6 +8,4 @@ __pycache__/
 .env
 
 # Model weights
-assets/models/*.pt
-assets/models/*.pth
-assets/models/*.onnx
+assets/models/

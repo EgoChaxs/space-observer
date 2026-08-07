@@ -62,6 +62,7 @@ class EvidenceBuilder:
             semantic_location_extractor:
                 Extracts semantic location information from detected objects.
         """
+        
         self._appearance_extractor = appearance_extractor
         self._semantic_location_extractor = semantic_location_extractor
 

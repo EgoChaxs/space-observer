@@ -14,7 +14,10 @@ class ImageSensor(Sensor):
     Supports both single image files and folders containing multiple images.
     """
 
-    def __init__(self, config: ImageSensorConfig):
+    def __init__(
+        self, 
+        config: ImageSensorConfig
+    ):
         """Initialize the image sensor with its configuration.
 
         Args:

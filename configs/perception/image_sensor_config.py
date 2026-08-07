@@ -18,6 +18,7 @@ class ImageSensorConfig:
         source_type: Type of image source used by the sensor.
         path: Path to the image file or folder containing images.
     """
+    
     sensor_id: str
     source_type: ImageSourceType
     path: str

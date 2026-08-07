@@ -1,5 +1,6 @@
 from ultralytics import YOLO
 from uuid import uuid4
+from pathlib import Path
 import numpy as np
 
 from src.perception.detectors.detector import Detector
@@ -11,14 +12,28 @@ from configs.perception.yolo_detector_config import YOLODetectorConfig
 class YOLODetector(Detector):
     """YOLO-based implementation of the detector interface."""
 
-    def __init__(self, config: YOLODetectorConfig):
+    def __init__(
+        self, 
+        config: YOLODetectorConfig
+    ):
         """Initialize the YOLO detector.
 
         Args:
             config: Configuration containing model path and detection settings.
+
+        Raises:
+            FileNotFoundError: If the configured model does not exist.
         """
         self.config = config
-        self.model = YOLO(config.model_path)
+        model_path = Path(config.model_path)
+
+        if not model_path.is_file():
+            raise FileNotFoundError(
+                f"YOLO model not found:\n{model_path}\n"
+                "Run the model setup script or follow the model installation instructions in the README."
+            )
+
+        self.model = YOLO(model_path)
 
     def detect(self, observation: Observation) -> list[Detection]:
         """Detect objects in an observation.
@@ -52,7 +67,7 @@ class YOLODetector(Detector):
 
         Returns:
             List of standardized detections.
-        """
+        """    
         detections = []
 
         for result in results:

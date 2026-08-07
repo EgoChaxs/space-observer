@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from src.perception.models.observation import Observation
 from src.perception.models.evidence import Evidence
 
+
 @dataclass(slots=True)
 class PerceptionResult:
     """

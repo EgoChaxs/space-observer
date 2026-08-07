@@ -1,4 +1,5 @@
 from uuid import uuid4
+from pathlib import Path
 import numpy as np
 
 from rfdetr import RFDETRSmall
@@ -12,16 +13,30 @@ from configs.perception.rf_detr_detector_config import RFDETRDetectorConfig
 class RFDETRDetector(Detector):
     """RF-DETR-based implementation of the detector interface."""
 
-    def __init__(self, config: RFDETRDetectorConfig):
+    def __init__(
+        self, 
+        config: RFDETRDetectorConfig
+    ):
         """Initialize the RF-DETR detector.
 
         Args:
             config: Configuration containing model path and detection settings.
+
+        Raises:
+            FileNotFoundError: If the configured model does not exist.
         """
         self.config = config
 
+        model_path = Path(config.model_path)
+
+        if not model_path.is_file():
+            raise FileNotFoundError(
+                f"RF-DETR model not found:\n{model_path}\n"
+                "Run the model setup script or follow the model installation instructions in the README."
+            )
+
         self.model = RFDETRSmall(
-            pretrain_weights=config.model_path
+            pretrain_weights=model_path
         )
 
     def detect(self, observation: Observation) -> list[Detection]:

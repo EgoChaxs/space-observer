@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 import numpy as np
 
+
 @dataclass(slots=True)
 class Observation:
     """
@@ -17,6 +18,7 @@ class Observation:
         timestamp: Time at which the observation was captured.
         payload: Raw sensor data captured by the sensor.
     """
+    
     id: str
     sensor_id: str
     timestamp: datetime

@@ -1,7 +1,9 @@
 import numpy as np
 import torch
 from transformers import AutoImageProcessor, AutoModel
+from pathlib import Path
 
+from configs.perception.appearance_extractor_config import AppearanceExtractorConfig
 from src.perception.models.appearance_embedding import AppearanceEmbedding
 from src.perception.models.detection import Detection, BoundingBox
 from src.perception.models.observation import Observation
@@ -14,17 +16,40 @@ class AppearanceExtractor:
     Uses a vision model to convert cropped object images into appearance
     embeddings that can later be compared for object similarity.
     """
-    def __init__(self, model_name: str = "facebook/dinov3-vits16-pretrain-lvd1689m"):
-        """
-        Initializes the appearance extractor.
+    def __init__(self, config: AppearanceExtractorConfig):
+        """Initialize the appearance extractor.
 
         Args:
-            model_name: Name or path of the pretrained vision model used to generate appearance embeddings.
-        """
-        self._processor = AutoImageProcessor.from_pretrained(model_name)
-        self._model = AutoModel.from_pretrained(model_name)
+            config: Configuration containing the local model path.
 
-    def extract(self, observation: Observation, detection: Detection) -> AppearanceEmbedding:
+        Raises:
+            FileNotFoundError: If the configured model does not exist.
+        """
+        self.config = config
+
+        model_path = Path(config.model_path)
+
+        if not model_path.is_dir():
+            raise FileNotFoundError(
+                f"Appearance model not found:\n{model_path}\n"
+                "Run the model setup script or follow the model installation instructions in the README."
+            )
+
+        self._processor = AutoImageProcessor.from_pretrained(
+            model_path,
+            local_files_only=True,
+        )
+
+        self._model = AutoModel.from_pretrained(
+            model_path,
+            local_files_only=True,
+        )
+
+    def extract(
+        self, 
+        observation: Observation, 
+        detection: Detection
+    ) -> AppearanceEmbedding:
         """
         Extracts an appearance embedding for a detected object.
 
@@ -48,7 +73,11 @@ class AppearanceExtractor:
             embedding=embedding
         )
     
-    def _crop(self, payload: np.ndarray, bbox: BoundingBox) -> np.ndarray:
+    def _crop(
+        self, 
+        payload: np.ndarray, 
+        bbox: BoundingBox
+    ) -> np.ndarray:
         """
         Crops an object region from an image payload using bounding box coordinates.
 
@@ -64,7 +93,10 @@ class AppearanceExtractor:
             int(bbox.x1):int(bbox.x2)
         ]
 
-    def _encode(self, cropped_image: np.ndarray) -> np.ndarray:
+    def _encode(
+        self, 
+        cropped_image: np.ndarray
+    ) -> np.ndarray:
         """
         Generates an appearance embedding from a cropped image.
 

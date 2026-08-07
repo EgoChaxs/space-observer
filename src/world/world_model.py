@@ -2,13 +2,13 @@ import numpy as np
 from uuid import UUID, uuid4
 from collections.abc import Collection
 
+from configs.world.world_model_config import WorldModelConfig
 from src.perception.models.perception_result import PerceptionResult
 from src.perception.models.evidence import Evidence
 from src.world.models.world_object import WorldObject
 from src.world.events.event import Event
 from src.world.generators.event_generator import EventGenerator
 
-MATCH_THRESHOLD = 0.60
 
 class WorldModel:
     """
@@ -23,17 +23,27 @@ class WorldModel:
     Perception subsystem for observations and detections, and produces events
     that can later be consumed by systems such as Memory.
     """
-    def __init__(self):
+    def __init__(
+        self,
+        config: WorldModelConfig
+    ):
         """
         Initializes an empty world state.
 
-        The World Model starts without any known objects. Objects are created and
-        added as they are discovered through incoming perception results.
+        Args:
+            config: Configuration for World Model behavior.
+
+        The World Model starts without any known objects. Objects are created
+        and added as they are discovered through incoming perception results.
         """
+        self._world_model_config = config
         self._objects: dict[UUID, WorldObject] = {}
         self._event_generator = EventGenerator()
 
-    def update(self, perception_result: PerceptionResult) -> list[Event]:
+    def update(
+        self, 
+        perception_result: PerceptionResult
+    ) -> list[Event]:
         """
         Updates the world state using a new perception result.
 
@@ -160,7 +170,10 @@ class WorldModel:
 
         return events
 
-    def _find_match(self, evidence: Evidence) -> WorldObject | None:
+    def _find_match(
+        self, 
+        evidence: Evidence
+    ) -> WorldObject | None:
         """
         Finds the existing WorldObject corresponding to a perception evidence.
 
@@ -192,12 +205,16 @@ class WorldModel:
                 best_similarity = similarity
                 best_match = world_object
 
-        if best_similarity < MATCH_THRESHOLD:
+        if best_similarity < self._world_model_config.match_threshold:
             return None
 
         return best_match
 
-    def _compare(self, world_object: WorldObject, evidence: Evidence) -> float:
+    def _compare(
+        self, 
+        world_object: WorldObject, 
+        evidence: Evidence
+    ) -> float:
         """
         Computes appearance similarity between a known object and new evidence.
 

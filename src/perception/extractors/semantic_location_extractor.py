@@ -1,19 +1,10 @@
 import math
 
+from configs.perception.semantic_location_config import LOCATION_CANDIDATES
 from src.perception.models.semantic_location import SemanticLocation
 from src.perception.models.detection import Detection
 from src.perception.models.observation import Observation
 
-LOCATION_CANDIDATES = {
-    "desk",
-    "table",
-    "shelf",
-    "bed",
-    "chair",
-    "floor",
-    "cabinet",
-    "box",
-}
 
 class SemanticLocationExtractor:
     """
@@ -25,7 +16,12 @@ class SemanticLocationExtractor:
     the detected object.
     """
 
-    def extract(self, observation: Observation, detection: Detection, detections: list[Detection]) -> SemanticLocation | None:
+    def extract(
+        self, 
+        observation: Observation, 
+        detection: Detection, 
+        detections: list[Detection]
+    ) -> SemanticLocation | None:
         """
         Extract the semantic location of an object.
 
@@ -52,7 +48,10 @@ class SemanticLocationExtractor:
             best_candidate.id
         )
 
-    def _find_best_candidate(self, detection: Detection, detections: list[Detection]) -> Detection | None:
+    def _find_best_candidate(
+        self, detection: Detection, 
+        detections: list[Detection]
+    ) -> Detection | None:
         """
         Find the highest scoring location candidate for an object.
 
@@ -89,7 +88,11 @@ class SemanticLocationExtractor:
             key=lambda item: item[1]
         )[0]
 
-    def _calculate_location_score(self, detection: Detection, candidate: Detection) -> float:
+    def _calculate_location_score(
+        self, 
+        detection: Detection, 
+        candidate: Detection
+    ) -> float:
         """
         Calculate how likely a candidate is to be the object's location.
 
@@ -119,7 +122,11 @@ class SemanticLocationExtractor:
             + containment_bonus * 0.10
         )
 
-    def _vertical_gap(self, detection: Detection, candidate: Detection) -> float:
+    def _vertical_gap(
+        self, 
+        detection: Detection, 
+        candidate: Detection
+    ) -> float:
         """
         Calculate the vertical proximity between two detections.
 
@@ -141,7 +148,11 @@ class SemanticLocationExtractor:
 
         return 1 / (1 + distance)
 
-    def _horizontal_overlap(self, detection: Detection, candidate: Detection) -> float:
+    def _horizontal_overlap(
+        self, 
+        detection: Detection, 
+        candidate: Detection
+    ) -> float:
         """
         Calculate horizontal overlap between two bounding boxes.
 
@@ -168,7 +179,11 @@ class SemanticLocationExtractor:
 
         return overlap_width / width
 
-    def _is_inside_candidate(self, detection: Detection, candidate: Detection) -> bool:
+    def _is_inside_candidate(
+        self, 
+        detection: Detection, 
+        candidate: Detection
+    ) -> bool:
         """
         Check whether an object bounding box is contained inside another.
 
@@ -193,7 +208,10 @@ class SemanticLocationExtractor:
             and box.y2 <= candidate_box.y2
         )
 
-    def _area_ratio(self, detection: Detection, candidate: Detection) -> float:
+    def _area_ratio(
+        self, detection: Detection, 
+        candidate: Detection
+    ) -> float:
         """
         Calculate the relative size difference between two detections.
 
@@ -215,7 +233,10 @@ class SemanticLocationExtractor:
 
         return min(math.log1p(ratio) / math.log1p(100), 1.0)
 
-    def _area(self, detection: Detection) -> float:
+    def _area(
+        self, 
+        detection: Detection
+    ) -> float:
         """
         Calculate the pixel area of a detection bounding box.
 
@@ -229,7 +250,9 @@ class SemanticLocationExtractor:
 
         return (bbox.x2 - bbox.x1) * (bbox.y2 - bbox.y1)
 
-    def _is_location_candidate(self, detection: Detection) -> bool:
+    def _is_location_candidate(
+        self, detection: Detection
+    ) -> bool:
         """
         Determine whether a detection can represent a location object.
 
@@ -245,7 +268,10 @@ class SemanticLocationExtractor:
         """
         return self._normalize_label(detection.entity) in LOCATION_CANDIDATES
 
-    def _normalize_label(self, label: str) -> str:
+    def _normalize_label(
+        self, 
+        label: str
+    ) -> str:
         """
         Normalize detector labels for comparison.
 
