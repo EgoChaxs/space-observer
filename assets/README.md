@@ -1,24 +1,52 @@
 # Models
 
-This directory contains the machine learning model weights used by Space Observer.
+This directory contains the machine learning models used by Space Observer.
 
-Model weights are not tracked by Git because they are binary files that can be large and can change independently from the source code.
+Model files are not tracked by Git because they can be large binary files and are managed independently from the source code.
+
+All models must be installed locally before running Space Observer. The application does not automatically download missing models at runtime.
 
 ## YOLO
 
-The current object detection implementation uses a YOLO model through the Ultralytics framework.
+- Tested models: YOLO11n, YOLO11m
+- Place `.pt` model files in `assets/models/yolo/`
+- Other YOLO models may work, but are not guaranteed to be compatible.
 
-Expected structure:
-```
-models/
-└── yolo11n.pt
+Example:
+
+```text
+assets/models/yolo/
+├── yolo11n.pt
+└── yolo11m.pt
 ```
 
-To use the YOLO detector, place the model weights in this directory and update the detector configuration with the correct path:
+## RF-DETR
 
-```python
-YOLODetectorConfig(
-    model_path="assets/models/yolo11n.pt",
-    confidence_threshold=0.5
-)
+- Tested model: RF-DETR Small
+- The weights must be compatible with RFDETRSmall.
+- Place the weights in assets/models/rf_detr_small/
+
+Example: 
+
+```text
+assets/models/rf_detr_small/
+└── rf-detr-small.pth
 ```
+
+## DINO
+
+- Tested models: DINOv3 ViT-S/16
+- The model must be compatible with the Hugging Face Transformers API.
+- Place the complete local model directory in assets/models/dinov3/
+
+## Grounding DINO
+
+- Tested model: Grounding DINO Base
+- The model must be compatible with the Hugging Face Transformers API.
+- Place the complete local model directory in assets/models/grounding_dino/
+
+## Warning
+
+Do not put arbitrary model files into these directories and assume they will work.
+
+Space Observer expects the model architecture and format required by the corresponding detector or extractor. Using an incompatible model may result in initialization errors or incorrect behavior.
