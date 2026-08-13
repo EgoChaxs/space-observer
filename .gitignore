@@ -9,3 +9,6 @@ __pycache__/
 
 # Model weights
 assets/models/
+
+# DB data
+data/
