@@ -18,6 +18,8 @@ from src.perception.engines.perception_engine import PerceptionEngine
 
 from src.world.world_model import WorldModel
 
+from src.memory.memory import Memory
+
 from debug.detection_visualizer import DetectionVisualizer
 
 def main():
@@ -78,7 +80,11 @@ def main():
     detection_engine = DetectionEngine(detection_engine_config, rfdetr_detector)
     perception_engine = PerceptionEngine(sensor, detection_engine, evidence_builder)
 
-    world_model = WorldModel(world_model_config)
+    memory = Memory()
+    last_state = memory.load_last_state()
+    print(last_state)
+
+    world_model = WorldModel(world_model_config, last_state)
 
     visualizer = DetectionVisualizer()
 
@@ -108,6 +114,8 @@ def main():
 
         print("EVENTS:")
         print(events)
+
+    memory.store_world_state(world_model.objects)
 
 if __name__ == "__main__":
     main()

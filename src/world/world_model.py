@@ -1,6 +1,5 @@
 import numpy as np
 from uuid import UUID, uuid4
-from collections.abc import Collection
 
 from configs.world.world_model_config import WorldModelConfig
 from src.perception.models.perception_result import PerceptionResult
@@ -25,19 +24,21 @@ class WorldModel:
     """
     def __init__(
         self,
-        config: WorldModelConfig
+        config: WorldModelConfig,
+        world_model_state: dict[UUID, WorldObject] | None = None
     ):
         """
         Initializes an empty world state.
 
         Args:
             config: Configuration for World Model behavior.
+            world_model_state: The last known state of the world otherwise empty dict by default.
 
         The World Model starts without any known objects. Objects are created
         and added as they are discovered through incoming perception results.
         """
         self._world_model_config = config
-        self._objects: dict[UUID, WorldObject] = {}
+        self._objects: dict[UUID, WorldObject] = world_model_state if world_model_state is not None else {}
         self._event_generator = EventGenerator()
 
     def update(
@@ -234,11 +235,11 @@ class WorldModel:
         )
 
     @property
-    def objects(self) -> Collection[WorldObject]:
+    def objects(self) -> dict[UUID, WorldObject]:
         """
         Provides access to the currently known world objects.
 
         Returns:
             A collection containing all WorldObjects tracked by the World Model.
         """
-        return self._objects.values()
+        return self._objects
