@@ -13,3 +13,11 @@ SessionLocal = sessionmaker(
 )
 
 Base = declarative_base()
+
+from src.database.models import (
+    SensorModel,
+    ObservationModel,
+    EventModel,
+    ObjectModel,
+    WorldStateModel,
+)

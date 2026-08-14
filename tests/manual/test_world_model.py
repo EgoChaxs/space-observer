@@ -23,9 +23,11 @@ from src.memory.memory import Memory
 from debug.detection_visualizer import DetectionVisualizer
 
 def main():
+    memory = Memory()
 
     sensor_config = ImageSensorConfig(
         sensor_id="test_dataset",
+        name="Bedroom",
         source_type=ImageSourceType.FOLDER,
         path="assets/test_images/"
     )
@@ -68,6 +70,8 @@ def main():
     world_model_config = WorldModelConfig()
 
     sensor = ImageSensor(sensor_config)
+    memory.store_sensor(sensor_config)
+
     yolo_detector = YOLODetector(yolo_detector_config)
     openvoc_detector = OpenVocabularyDetector(openvoc_detector_config)
     rfdetr_detector = RFDETRDetector(rfdetr_detector_config)
@@ -80,7 +84,6 @@ def main():
     detection_engine = DetectionEngine(detection_engine_config, rfdetr_detector)
     perception_engine = PerceptionEngine(sensor, detection_engine, evidence_builder)
 
-    memory = Memory()
     last_state = memory.load_last_state()
     print(last_state)
 

@@ -6,10 +6,27 @@ import numpy as np
 from src.database.database import SessionLocal
 from src.database.models.world_state_snapshot import WorldStateModel
 from src.world.models.world_object import WorldObject
+from src.database.models.sensor import SensorModel
 
 class Memory:
-    def store_sensor(self, sensor):
-        ...
+    def store_sensor(self, sensor_config):
+        with SessionLocal() as session:
+            existing_sensor = (
+                session.query(SensorModel)
+                .filter_by(sensor_uuid=sensor_config.sensor_id)
+                .first()
+            )
+
+            if existing_sensor is not None:
+                return
+
+            sensor_model = SensorModel(
+                sensor_uuid=sensor_config.sensor_id,
+                name=sensor_config.name
+            )
+
+            session.add(sensor_model)
+            session.commit()
 
     def store_observation(self, observation):
         ...
