@@ -19,3 +19,14 @@ class ObjectReappearedEvent(Event):
     """
 
     location: UUID | None
+
+    @property
+    def payload(self) -> dict:
+        """Return the event-specific data for database storage."""
+        return {
+            "location": (
+                str(self.location)
+                if self.location is not None
+                else None
+            )
+        }

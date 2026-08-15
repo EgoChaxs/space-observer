@@ -3,6 +3,13 @@ from sqlalchemy.orm import relationship
 from src.database.database import Base
 
 class SensorModel(Base):
+    """
+    Database model representing a sensor used by the application.
+
+    Each sensor is uniquely identified by its sensor UUID and can produce
+    multiple observations.
+    """
+    
     __tablename__ = "sensor"
 
     # Columns

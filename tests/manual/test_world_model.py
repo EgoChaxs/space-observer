@@ -4,6 +4,7 @@ from configs.perception.rf_detr_detector_config import RFDETRDetectorConfig
 from configs.perception.image_sensor_config import ImageSensorConfig, ImageSourceType
 from configs.perception.appearance_extractor_config import AppearanceExtractorConfig
 from configs.perception.detection_engine_config import DetectionEngineConfig
+from configs.perception.observation_storage_config import ObservationStorageConfig
 from configs.world.world_model_config import WorldModelConfig
 
 from src.perception.detectors.open_vocabulary_detector import OpenVocabularyDetector
@@ -24,6 +25,8 @@ from debug.detection_visualizer import DetectionVisualizer
 
 def main():
     memory = Memory()
+
+    path_config = ObservationStorageConfig()
 
     sensor_config = ImageSensorConfig(
         sensor_id="test_dataset",
@@ -106,7 +109,25 @@ def main():
                 evidence.detection.bounding_box
             )
 
-        events = world_model.update(perception_result)
+        events, modified_objects = world_model.update(perception_result)
+
+        for world_object in modified_objects:
+            memory.store_object(world_object)
+
+        if events:
+            path = (
+                path_config.base_path
+                + f"/{sensor_config.sensor_id}/"
+                + f"{perception_result.observation.timestamp}.jpg"
+            )
+
+            observation_id = memory.store_observation(
+                perception_result.observation,
+                path
+            )
+
+            for event in events:
+                memory.store_event(event, observation_id)
 
         for evidence in perception_result.evidences:
             print(f"DETECTED: {evidence.detection.entity} \n")

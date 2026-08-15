@@ -20,3 +20,19 @@ class ObjectMovedEvent(Event):
 
     from_location: UUID
     to_location: UUID
+
+    @property
+    def payload(self) -> dict:
+        """Return the event-specific data for database storage."""
+        return {
+            "from_location": (
+                str(self.from_location)
+                if self.from_location is not None
+                else None
+            ),
+            "to_location": (
+                str(self.to_location)
+                if self.to_location is not None
+                else None
+            ),
+        }

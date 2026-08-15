@@ -44,7 +44,7 @@ class WorldModel:
     def update(
         self, 
         perception_result: PerceptionResult
-    ) -> list[Event]:
+    ) -> tuple[list[Event], list[WorldObject]]:
         """
         Updates the world state using a new perception result.
 
@@ -59,9 +59,11 @@ class WorldModel:
                 containing detected objects and extracted evidence.
 
         Returns:
-            A list of events describing changes detected during the update.
+            A tuple containing a list of events describing changes detected during the update
+            and a list of world objects that have been modified requiring persistance.
         """
         events: list[Event] = []
+        modified_objects: list[WorldObject] = []
 
         detection_to_world_object: dict[UUID, WorldObject] = {}
         updated_objects: set[UUID] = set()
@@ -85,6 +87,7 @@ class WorldModel:
 
                 self._objects[world_object.id] = world_object
                 created_objects.add(world_object.id)
+                modified_objects.append(world_object)
 
             updated_objects.add(world_object.id)
 
@@ -152,6 +155,8 @@ class WorldModel:
             if new_location is not None:
                 world_object.semantic_location = new_location
 
+            modified_objects.append(world_object)
+
         # Mark unseen objects as invisible
         unupdated_object_ids = self._objects.keys() - updated_objects
 
@@ -168,8 +173,9 @@ class WorldModel:
                 )
 
             world_object.is_visible = False
+            modified_objects.append(world_object)
 
-        return events
+        return events, modified_objects
 
     def _find_match(
         self, 

@@ -3,6 +3,13 @@ from sqlalchemy.orm import relationship
 from src.database.database import Base
 
 class ObservationModel(Base):
+    """
+    Database model representing a sensor observation.
+
+    Stores the observation metadata and the sensor that produced it.
+    The observation path points to the persisted observation data on disk.
+    """
+    
     __tablename__ = "observation"
 
     # Columns

@@ -3,6 +3,14 @@ from sqlalchemy.orm import relationship
 from src.database.database import Base
 
 class ObjectModel(Base):
+    """
+    Database model representing a persistent WorldObject.
+
+    Each row corresponds to one WorldObject and stores its current known
+    state, including its appearance embedding, semantic location,
+    visibility, and timestamps.
+    """
+    
     __tablename__ = "object"
 
     # Columns
