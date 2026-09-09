@@ -5,7 +5,7 @@ from datetime import datetime
 from uuid import UUID
 
 
-@dataclass
+@dataclass(slots=True)
 class WorldObject:
     """
     Represents a persistent object tracked by the World Model.
