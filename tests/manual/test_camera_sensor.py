@@ -32,7 +32,8 @@ def main():
     memory.store_sensor(sensor_config)
 
     detector_config = RFDETRDetectorConfig(
-        model_path="assets/models/rf_detr_small/rf-detr-small.pth"
+        model_path="assets/models/rf_detr_small/rf-detr-small.pth",
+        confidence_threshold=0.6
     )
     
     detector = RFDETRDetector(detector_config)
