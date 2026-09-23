@@ -1,4 +1,5 @@
 accelerate==1.14.0
+alembic==1.19.1
 annotated-doc==0.0.4
 annotated-types==0.8.0
 anyio==4.14.2
@@ -21,6 +22,7 @@ huggingface_hub==1.24.0
 idna==3.18
 Jinja2==3.1.6
 kiwisolver==1.5.0
+Mako==1.4.1
 markdown-it-py==4.2.0
 MarkupSafe==3.0.3
 matplotlib==3.11.0
@@ -52,6 +54,7 @@ scipy==1.18.0
 setuptools==83.0.0
 shellingham==1.5.4
 six==1.17.0
+SQLAlchemy==2.0.52
 supervision==0.30.0
 sympy==1.14.0
 tokenizers==0.22.2
